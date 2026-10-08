@@ -3,223 +3,342 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laudo de Avarias - Nova Mega G</title>
-    <!-- Tailwind CSS para Estilização Rápida -->
+    <title>Laudo e Orçamentos de Avarias - Nova Mega G</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @media print {
-            .no-print { display: none !important; }
-            body { background: white !important; font-size: 12pt; }
-            .print-container { shadow: none !important; border: none !important; padding: 0 !important; width: 100% !important; }
-            .page-break { page-break-before: always; }
+        @import url('https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap');
+        
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f3f4f6;
+            color: #000;
         }
+
+        /* Formatação de Impressão / PDF Exata para A4 */
+        .a4-page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 15mm 20mm;
+            margin: 10mm auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        @media print {
+            body { background: white; margin: 0; }
+            .no-print { display: none !important; }
+            .a4-page {
+                box-shadow: none;
+                margin: 0;
+                width: 100%;
+                height: 100vh;
+                page-break-after: always;
+                padding: 12mm 15mm;
+            }
+        }
+
         canvas { touch-action: none; }
+        .table-border, .table-border th, .table-border td {
+            border: 1px solid #000;
+        }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen p-4 md:p-8 text-gray-800">
+<body class="p-2 md:p-6">
 
-    <div class="max-w-4xl mx-auto">
-        <!-- BARRA DE AÇÕES (Não sai na impressão) -->
-        <div class="no-print mb-6 bg-white p-4 rounded-xl shadow-md flex flex-wrap justify-between items-center gap-4">
+    <!-- BARRA DE CONTROLE SUPERIOR -->
+    <div class="no-print max-w-4xl mx-auto mb-6 bg-white p-4 rounded-lg shadow flex justify-between items-center border">
+        <div>
+            <h1 class="font-bold text-lg text-gray-800">Modelo Oficial - Laudo de Avarias</h1>
+            <p class="text-xs text-gray-500">Nova Mega G Atacadista de Alimentos S.A.</p>
+        </div>
+        <div class="flex gap-3">
+            <button onclick="window.print()" class="bg-black hover:bg-gray-800 text-white text-sm font-bold px-5 py-2 rounded shadow flex items-center gap-2">
+                🖨️ Imprimir / Salvar PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- CONTÊINER DO LAUDO -->
+    <div class="max-w-4xl mx-auto space-y-6">
+
+        <!-- ==================== PÁGINA 1: LAUDO E DETALHES ==================== -->
+        <div class="a4-page">
             <div>
-                <h1 class="text-xl font-bold text-gray-800">Gerador de Laudo de Avarias</h1>
-                <p class="text-xs text-gray-500">Nova Mega G Atacadista de Alimentos S.A.</p>
+                <!-- CABEÇALHO -->
+                <div class="flex justify-between items-center border-b pb-3 mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-16 h-16 border-2 border-black flex items-center justify-center font-bold text-center text-xs p-1">
+                            Mega G<br><span class="text-[9px]">ALIMENTOS</span>
+                        </div>
+                        <div>
+                            <h2 class="font-bold text-sm uppercase">Nova Mega G Atacadista de Alimentos S.A.</h2>
+                            <p class="text-xs">CNPJ: 19.043.440/0002-35</p>
+                        </div>
+                    </div>
+                    <div class="text-right text-xs font-bold uppercase">
+                        FROTA PRÓPRIA MEGAG VGP
+                    </div>
+                </div>
+
+                <h3 class="text-center font-bold text-sm tracking-wide uppercase mb-6 underline">
+                    LAUDO E ORÇAMENTOS DE AVARIAS
+                </h3>
+
+                <!-- TABELA DE INFORMAÇÕES DO VEÍCULO -->
+                <div class="text-xs space-y-2 mb-6">
+                    <div class="flex"><span class="font-bold w-48">VEÍCULO:</span> <input type="text" value="TCA7G97" class="font-bold uppercase outline-none flex-1 border-b border-dotted"></div>
+                    <div class="flex"><span class="font-bold w-48">TIPOLOGIA:</span> <input type="text" value="VUC" class="uppercase outline-none flex-1 border-b border-dotted"></div>
+                    <div class="flex"><span class="font-bold w-48">QUILOMETRAGEM:</span> <input type="text" value="163826" class="outline-none flex-1 border-b border-dotted"></div>
+                    <div class="flex"><span class="font-bold w-48">DATA DO OCORRIDO:</span> <input type="text" value="19/09/2026" class="outline-none flex-1 border-b border-dotted"></div>
+                    <div class="flex"><span class="font-bold w-48">DATA DOS ORÇAMENTOS:</span> <input type="text" value="19/09/2026" class="outline-none flex-1 border-b border-dotted"></div>
+                    <div class="flex"><span class="font-bold w-48">DATA DE RESOLUÇÃO:</span> <input type="text" value="19/09/2026" class="outline-none flex-1 border-b border-dotted"></div>
+                    <div class="flex"><span class="font-bold w-48">VALOR DO ORÇAMENTO:</span> <input type="text" value="R$ 55,00" class="font-bold text-red-600 outline-none flex-1 border-b border-dotted"></div>
+                </div>
+
+                <!-- DESCRIÇÃO DA AVARIA -->
+                <div class="text-xs mb-8">
+                    <span class="font-bold block mb-1 uppercase">DESCRIÇÃO DA AVARIA:</span>
+                    <textarea rows="3" class="w-full border p-2 outline-none text-xs">Pneu precisou ser consertado.</textarea>
+                </div>
+
+                <!-- CAMPO DE ASSINATURA -->
+                <div class="mt-12 text-center">
+                    <div class="w-64 mx-auto border-b border-black mb-1">
+                        <canvas id="sig1" width="250" height="70" class="mx-auto cursor-crosshair"></canvas>
+                    </div>
+                    <p class="text-xs font-bold">Manoel Medina</p>
+                    <p class="text-[10px] text-gray-600">Mega G Matriz</p>
+                    <button onclick="clearSig('sig1')" class="no-print text-[10px] text-red-600 underline mt-1">Limpar Assinatura</button>
+                </div>
             </div>
-            <div class="flex gap-3">
-                <button onclick="window.print()" class="bg-red-600 hover:bg-red-700 text-white font-semibold px-5 py-2.5 rounded-lg shadow flex items-center gap-2 transition">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 2 0 002-2v-4a2 2 2 0 00-2-2H5a2 2 2 0 00-2 2v4a2 2 2 0 002 2h2m2 4h6a2 2 2 0 002-2v-4a2 2 2 0 00-2-2H9a2 2 2 0 00-2 2v4a2 2 2 0 002 2zm8-12V5a2 2 2 0 00-2-2H9a2 2 2 0 00-2 2v4h10z"></path></svg>
-                    Gerar PDF / Imprimir
-                </button>
+
+            <!-- RODAPÉ -->
+            <div class="text-center text-[9px] border-t pt-2 text-gray-600">
+                Estrada Ribeirão das Lages, 50 - Lajes - Cep: 06730-000 - Vargem Grande Paulista - SP / Fone: (11) 4130-3571
             </div>
         </div>
 
-        <!-- FOLHA DO LAUDO -->
-        <div id="laudo-sheet" class="print-container bg-white p-8 rounded-xl shadow-lg border border-gray-200 space-y-6">
-            
-            <!-- CABEÇALHO -->
-            <div class="flex justify-between items-start border-b-2 border-red-600 pb-4">
-                <div>
-                    <h2 class="text-2xl font-black text-gray-900 tracking-wide">Nova Mega G Atacadista de Alimentos S.A.</h2>
-                    <p class="text-sm font-semibold text-gray-600">CNPJ: 19.043.440/0002-35</p>
-                    <p class="text-xs text-gray-500">FROTA PRÓPRIA MEGAG VGP</p>
-                </div>
-                <div class="text-right">
-                    <span class="inline-block bg-red-100 text-red-800 text-xs font-bold px-3 py-1 rounded-full uppercase border border-red-200">
-                        Laudo Técnico & Orçamentos
-                    </span>
-                </div>
-            </div>
 
-            <h3 class="text-center text-lg font-bold uppercase text-gray-800 tracking-wider underline">
-                Laudo e Orçamentos de Avarias
-            </h3>
-
-            <!-- FORMULÁRIO / DADOS DO VEÍCULO -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-gray-50 p-4 rounded-lg border border-gray-200">
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 uppercase">Veículo / Placa:</label>
-                    <input type="text" id="placa" value="TCA7G97" class="w-full bg-white border border-gray-300 rounded px-3 py-1.5 font-bold uppercase text-gray-800 focus:ring-2 focus:ring-red-500 outline-none">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 uppercase">Tipologia:</label>
-                    <input type="text" id="tipologia" value="VUC" class="w-full bg-white border border-gray-300 rounded px-3 py-1.5 text-gray-800 focus:ring-2 focus:ring-red-500 outline-none">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 uppercase">Quilometragem (KM):</label>
-                    <input type="number" id="km" value="163826" class="w-full bg-white border border-gray-300 rounded px-3 py-1.5 text-gray-800 focus:ring-2 focus:ring-red-500 outline-none">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 uppercase">Data do Ocorrido:</label>
-                    <input type="date" id="dataOcorrido" class="w-full bg-white border border-gray-300 rounded px-3 py-1.5 text-gray-800 focus:ring-2 focus:ring-red-500 outline-none">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 uppercase">Data dos Orçamentos:</label>
-                    <input type="date" id="dataOrcamento" class="w-full bg-white border border-gray-300 rounded px-3 py-1.5 text-gray-800 focus:ring-2 focus:ring-red-500 outline-none">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 uppercase">Data de Resolução:</label>
-                    <input type="date" id="dataResolucao" class="w-full bg-white border border-gray-300 rounded px-3 py-1.5 text-gray-800 focus:ring-2 focus:ring-red-500 outline-none">
-                </div>
-            </div>
-
-            <!-- VALOR E DESCRIÇÃO DA AVARIA -->
-            <div class="space-y-3">
-                <div class="flex items-center gap-4">
-                    <label class="text-sm font-bold text-gray-700 uppercase">Valor do Orçamento (R$):</label>
-                    <input type="text" id="valorOrcamento" value="55,00" class="w-40 bg-white border border-gray-300 rounded px-3 py-1.5 font-bold text-red-600 focus:ring-2 focus:ring-red-500 outline-none">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Descrição da Avaria:</label>
-                    <textarea id="descricao" rows="2" class="w-full bg-white border border-gray-300 rounded p-2 text-gray-800 focus:ring-2 focus:ring-red-500 outline-none">Pneu precisou ser consertado (furo no pneu).</textarea>
-                </div>
-            </div>
-
-            <!-- EVIDÊNCIAS FOTOGRÁFICAS -->
-            <div class="border-t pt-4">
-                <h4 class="text-sm font-bold text-gray-700 uppercase mb-3">Imagem e Evidências da Avaria</h4>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-3 text-center">
-                        <input type="file" id="foto1" accept="image/*" class="no-print hidden" onchange="previewImage(this, 'imgPreview1')">
-                        <label for="foto1" class="no-print cursor-pointer text-xs font-semibold text-red-600 hover:text-red-800 block mb-2">📷 Anexar Foto da Placa / Frente</label>
-                        <img id="imgPreview1" class="max-h-48 mx-auto rounded object-cover shadow-sm hidden">
+        <!-- ==================== PÁGINA 2: FOTO DA PLACA / VEÍCULO ==================== -->
+        <div class="a4-page">
+            <div>
+                <!-- CABEÇALHO -->
+                <div class="flex justify-between items-center border-b pb-3 mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 border-2 border-black flex items-center justify-center font-bold text-center text-[10px]">
+                            Mega G
+                        </div>
+                        <div>
+                            <h2 class="font-bold text-xs uppercase">Nova Mega G Atacadista de Alimentos S.A.</h2>
+                            <p class="text-[10px]">CNPJ: 19.043.440/0002-35</p>
+                        </div>
                     </div>
-                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-3 text-center">
-                        <input type="file" id="foto2" accept="image/*" class="no-print hidden" onchange="previewImage(this, 'imgPreview2')">
-                        <label for="foto2" class="no-print cursor-pointer text-xs font-semibold text-red-600 hover:text-red-800 block mb-2">📷 Anexar Foto da Avaria / Reparo</label>
-                        <img id="imgPreview2" class="max-h-48 mx-auto rounded object-cover shadow-sm hidden">
+                    <h3 class="font-bold text-xs uppercase">IMAGEM E EVIDÊNCIAS DA AVARIA</h3>
+                </div>
+
+                <!-- ÁREA DA IMAGEM 1 -->
+                <div class="my-6 text-center">
+                    <input type="file" id="file1" accept="image/*" class="no-print hidden" onchange="loadImg(this, 'preview1')">
+                    <label for="file1" class="no-print cursor-pointer text-xs font-bold text-blue-600 underline block mb-3">
+                        📷 Clique aqui para selecionar / carregar foto da Placa
+                    </label>
+                    <div class="border border-black p-2 min-h-[350px] flex items-center justify-center bg-gray-50">
+                        <img id="preview1" class="max-h-[450px] mx-auto object-contain">
                     </div>
                 </div>
+
+                <!-- ASSINATURA -->
+                <div class="mt-8 text-center">
+                    <div class="w-64 mx-auto border-b border-black mb-1">
+                        <canvas id="sig2" width="250" height="60" class="mx-auto cursor-crosshair"></canvas>
+                    </div>
+                    <p class="text-xs font-bold">Manoel Medina</p>
+                    <p class="text-[10px] text-gray-600">Mega G Matriz</p>
+                </div>
             </div>
 
-            <!-- FORNECEDOR E ORÇAMENTO -->
-            <div class="border-t pt-4">
-                <h4 class="text-sm font-bold text-gray-700 uppercase mb-2">Orçamentos e Formas de Pagamento</h4>
-                <table class="w-full text-sm text-left border border-gray-200">
-                    <thead class="bg-gray-100 text-xs uppercase font-bold text-gray-600">
-                        <tr>
-                            <th class="p-2 border">Fornecedor</th>
-                            <th class="p-2 border">Valor</th>
-                            <th class="p-2 border">Forma de Pagamento</th>
-                            <th class="p-2 border">Prazo de Entrega</th>
+            <!-- RODAPÉ -->
+            <div class="text-center text-[9px] border-t pt-2 text-gray-600">
+                Estrada Ribeirão das Lages, 50 - Lajes - Cep: 06730-000 - Vargem Grande Paulista - SP / Fone: (11) 4130-3571
+            </div>
+        </div>
+
+
+        <!-- ==================== PÁGINA 3: FOTOS DO REPARO ==================== -->
+        <div class="a4-page">
+            <div>
+                <!-- CABEÇALHO -->
+                <div class="flex justify-between items-center border-b pb-3 mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 border-2 border-black flex items-center justify-center font-bold text-center text-[10px]">
+                            Mega G
+                        </div>
+                        <div>
+                            <h2 class="font-bold text-xs uppercase">Nova Mega G Atacadista de Alimentos S.A.</h2>
+                            <p class="text-[10px]">CNPJ: 19.043.440/0002-35</p>
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-xs uppercase">EVIDÊNCIAS DO SERVIÇO / AVARIA</h3>
+                </div>
+
+                <!-- ÁREA DA IMAGEM 2 -->
+                <div class="my-4 text-center">
+                    <input type="file" id="file2" accept="image/*" class="no-print hidden" onchange="loadImg(this, 'preview2')">
+                    <label for="file2" class="no-print cursor-pointer text-xs font-bold text-blue-600 underline block mb-3">
+                        📷 Clique aqui para selecionar / carregar foto da Avaria/Pneu
+                    </label>
+                    <div class="border border-black p-2 min-h-[380px] flex items-center justify-center bg-gray-50">
+                        <img id="preview2" class="max-h-[480px] mx-auto object-contain">
+                    </div>
+                </div>
+
+                <!-- ASSINATURA -->
+                <div class="mt-6 text-center">
+                    <div class="w-64 mx-auto border-b border-black mb-1">
+                        <canvas id="sig3" width="250" height="60" class="mx-auto cursor-crosshair"></canvas>
+                    </div>
+                    <p class="text-xs font-bold">Manoel Medina</p>
+                    <p class="text-[10px] text-gray-600">Mega G Matriz</p>
+                </div>
+            </div>
+
+            <!-- RODAPÉ -->
+            <div class="text-center text-[9px] border-t pt-2 text-gray-600">
+                Estrada Ribeirão das Lages, 50 - Lajes - Cep: 06730-000 - Vargem Grande Paulista - SP / Fone: (11) 4130-3571
+            </div>
+        </div>
+
+
+        <!-- ==================== PÁGINA 4: ORÇAMENTOS E FORNECEDORES ==================== -->
+        <div class="a4-page">
+            <div>
+                <!-- CABEÇALHO -->
+                <div class="flex justify-between items-center border-b pb-3 mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 border-2 border-black flex items-center justify-center font-bold text-center text-[10px]">
+                            Mega G
+                        </div>
+                        <div>
+                            <h2 class="font-bold text-xs uppercase">Nova Mega G Atacadista de Alimentos S.A.</h2>
+                            <p class="text-[10px]">CNPJ: 19.043.440/0002-35</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-center font-bold text-xs uppercase mb-6 underline">
+                    ORÇAMENTOS E FORMAS DE PAGAMENTO
+                </h3>
+
+                <!-- TABELA DE COTAÇÕES -->
+                <table class="w-full text-xs table-border mb-8">
+                    <thead>
+                        <tr class="bg-gray-100 font-bold uppercase">
+                            <th class="p-2 text-left">Fornecedor</th>
+                            <th class="p-2 text-center w-28">Valor</th>
+                            <th class="p-2 text-center w-36">Forma de Pagamento</th>
+                            <th class="p-2 text-center w-32">Prazo de Entrega</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="p-2 border"><input type="text" value="Assalve & Assalve LTDA" class="w-full outline-none bg-transparent"></td>
-                            <td class="p-2 border"><input type="text" value="R$ 55,00" class="w-full outline-none bg-transparent font-bold"></td>
-                            <td class="p-2 border"><input type="text" value="Boleto" class="w-full outline-none bg-transparent"></td>
-                            <td class="p-2 border"><input type="text" value="30 DIAS" class="w-full outline-none bg-transparent"></td>
+                            <td class="p-2"><input type="text" value="Assalve & Assalve LTDA" class="w-full outline-none bg-transparent"></td>
+                            <td class="p-2 text-center font-bold"><input type="text" value="R$ 55,00" class="w-full text-center outline-none bg-transparent"></td>
+                            <td class="p-2 text-center"><input type="text" value="Boleto" class="w-full text-center outline-none bg-transparent"></td>
+                            <td class="p-2 text-center"><input type="text" value="30 DIAS" class="w-full text-center outline-none bg-transparent"></td>
                         </tr>
                     </tbody>
                 </table>
+
+                <!-- ASSINATURAS E APROVAÇÕES DA GERÊNCIA -->
+                <div class="mt-20 space-y-12 text-center">
+                    <div class="grid grid-cols-2 gap-8">
+                        <div>
+                            <div class="w-48 mx-auto border-b border-black mb-1"></div>
+                            <p class="text-xs font-bold uppercase">RESP. FROTA</p>
+                        </div>
+                        <div>
+                            <div class="w-48 mx-auto border-b border-black mb-1"></div>
+                            <p class="text-xs font-bold uppercase">GERÊNCIA</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="w-48 mx-auto border-b border-black mb-1"></div>
+                        <p class="text-xs font-bold uppercase">GESTOR DE FROTA</p>
+                    </div>
+                </div>
             </div>
 
-            <!-- ASSINATURA DIGITAL DO GESTOR -->
-            <div class="border-t pt-4">
-                <div class="flex justify-between items-center mb-2">
-                    <h4 class="text-sm font-bold text-gray-700 uppercase">Assinatura do Gestor / Responsável</h4>
-                    <button onclick="clearSignature()" class="no-print text-xs text-red-600 hover:underline">Limpar Assinatura</button>
-                </div>
-                <div class="border-2 border-gray-300 rounded bg-gray-50 max-w-sm mx-auto">
-                    <canvas id="signatureCanvas" width="350" height="120" class="w-full h-28 cursor-crosshair"></canvas>
-                </div>
-                <div class="text-center mt-2">
-                    <p class="text-xs font-bold text-gray-800">Manoel Medina / Kaique Fagundes</p>
-                    <p class="text-xs text-gray-500">Gestão de Frota & Logística</p>
-                </div>
+            <!-- RODAPÉ -->
+            <div class="text-center text-[9px] border-t pt-2 text-gray-600">
+                Estrada Ribeirão das Lages, 50 - Lajes - Cep: 06730-000 - Vargem Grande Paulista - SP / Fone: (11) 4130-3571
             </div>
-
-            <!-- RODAPÉ FIXO -->
-            <div class="border-t pt-3 text-center text-[10px] text-gray-500">
-                <p>Estrada Ribeirão das Lages, 50 - Lajes - CEP: 06730-000 - Vargem Grande Paulista - SP | Fone: (11) 4130-3571</p>
-            </div>
-
         </div>
+
     </div>
 
-    <!-- SCRIPT DE INTERAÇÃO -->
+    <!-- SCRIPT DE ASSINATURAS E IMAGENS -->
     <script>
-        // Preencher data de hoje por padrão
-        const today = new Date().toISOString().split('T')[0];
-        document.getElementById('dataOcorrido').value = today;
-        document.getElementById('dataOrcamento').value = today;
-        document.getElementById('dataResolucao').value = today;
-
-        // Visualização de fotos
-        function previewImage(input, previewId) {
-            const file = input.files[0];
-            if (file) {
+        function loadImg(input, imgId) {
+            if (input.files && input.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    const img = document.getElementById(previewId);
-                    img.src = e.target.result;
-                    img.classList.remove('hidden');
+                    document.getElementById(imgId).src = e.target.result;
                 }
-                reader.readAsDataURL(file);
+                reader.readAsDataURL(input.files[0]);
             }
         }
 
-        // Configuração do Canvas de Assinatura
-        const canvas = document.getElementById('signatureCanvas');
-        const ctx = canvas.getContext('2d');
-        let isDrawing = false;
+        function setupCanvas(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let drawing = false;
 
-        function getPos(e) {
-            const rect = canvas.getBoundingClientRect();
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-            return { x: clientX - rect.left, y: clientY - rect.top };
+            function getPos(e) {
+                const rect = canvas.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                return { x: clientX - rect.left, y: clientY - rect.top };
+            }
+
+            function start(e) {
+                drawing = true;
+                const pos = getPos(e);
+                ctx.beginPath();
+                ctx.moveTo(pos.x, pos.y);
+                e.preventDefault();
+            }
+
+            function move(e) {
+                if (!drawing) return;
+                const pos = getPos(e);
+                ctx.lineWidth = 1.8;
+                ctx.lineCap = 'round';
+                ctx.strokeStyle = '#000080'; // Cor Azul Caneta
+                ctx.lineTo(pos.x, pos.y);
+                ctx.stroke();
+                e.preventDefault();
+            }
+
+            function stop() { drawing = false; }
+
+            canvas.addEventListener('mousedown', start);
+            canvas.addEventListener('mousemove', move);
+            canvas.addEventListener('mouseup', stop);
+            canvas.addEventListener('touchstart', start);
+            canvas.addEventListener('touchmove', move);
+            canvas.addEventListener('touchend', stop);
         }
 
-        function startDrawing(e) {
-            isDrawing = true;
-            const pos = getPos(e);
-            ctx.beginPath();
-            ctx.moveTo(pos.x, pos.y);
-            e.preventDefault();
-        }
+        ['sig1', 'sig2', 'sig3'].forEach(setupCanvas);
 
-        function draw(e) {
-            if (!isDrawing) return;
-            const pos = getPos(e);
-            ctx.lineWidth = 2;
-            ctx.lineCap = 'round';
-            ctx.strokeStyle = '#1e293b';
-            ctx.lineTo(pos.x, pos.y);
-            ctx.stroke();
-            e.preventDefault();
-        }
-
-        function stopDrawing() { isDrawing = false; }
-
-        canvas.addEventListener('mousedown', startDrawing);
-        canvas.addEventListener('mousemove', draw);
-        canvas.addEventListener('mouseup', stopDrawing);
-        canvas.addEventListener('touchstart', startDrawing);
-        canvas.addEventListener('touchmove', draw);
-        canvas.addEventListener('touchend', stopDrawing);
-
-        function clearSignature() {
+        function clearSig(id) {
+            const canvas = document.getElementById(id);
+            const ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
     </script>

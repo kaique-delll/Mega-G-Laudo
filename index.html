@@ -20,7 +20,7 @@
             padding: 20px 10px;
         }
 
-        /* BARRA SUPERIOR */
+        /* BARRA SUPERIOR DE CONTROLE */
         .top-bar {
             max-width: 800px;
             margin: 0 auto 20px auto;
@@ -59,7 +59,7 @@
             background-color: #374151;
         }
 
-        /* FOLHA A4 */
+        /* ESTRUTURA DA FOLHA A4 */
         .a4-container {
             max-width: 800px;
             margin: 0 auto;
@@ -193,7 +193,7 @@
             width: 100%;
             border-collapse: collapse;
             font-size: 12px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         table.data-table th, table.data-table td {
@@ -210,7 +210,7 @@
 
         .sig-section {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 60px;
         }
 
         .sig-line {
@@ -219,9 +219,12 @@
             border-bottom: 1px solid #000;
         }
 
-        canvas {
-            touch-action: none;
-            cursor: crosshair;
+        .date-location {
+            text-align: right;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 25px;
+            margin-bottom: 25px;
         }
 
         .footer {
@@ -230,16 +233,6 @@
             color: #4b5563;
             border-top: 1px solid #e5e7eb;
             padding-top: 10px;
-        }
-
-        .btn-link {
-            font-size: 11px;
-            color: #dc2626;
-            background: none;
-            border: none;
-            text-decoration: underline;
-            cursor: pointer;
-            margin-top: 4px;
         }
 
         .grid-2 {
@@ -251,7 +244,7 @@
 </head>
 <body>
 
-    <!-- BARRA DE CONTROLE SUPERIOR -->
+    <!-- BARRA SUPERIOR -->
     <div class="top-bar no-print">
         <div>
             <h1>Sistema de Laudo de Avarias</h1>
@@ -299,12 +292,9 @@
                 </div>
 
                 <div class="sig-section">
-                    <div class="sig-line">
-                        <canvas id="sig1" width="250" height="70"></canvas>
-                    </div>
+                    <div class="sig-line"></div>
                     <p style="font-size: 12px; font-weight: bold;">Kaique Fagundes</p>
                     <p style="font-size: 10px; color: #6b7280;">Logística e Transporte - Araraquara</p>
-                    <button onclick="clearSig('sig1')" class="btn-link no-print">Limpar Assinatura</button>
                 </div>
             </div>
 
@@ -339,12 +329,9 @@
                 </div>
 
                 <div class="sig-section">
-                    <div class="sig-line">
-                        <canvas id="sig2" width="250" height="60"></canvas>
-                    </div>
+                    <div class="sig-line"></div>
                     <p style="font-size: 12px; font-weight: bold;">Kaique Fagundes</p>
                     <p style="font-size: 10px; color: #6b7280;">Logística e Transporte - Araraquara</p>
-                    <button onclick="clearSig('sig2')" class="btn-link no-print">Limpar Assinatura</button>
                 </div>
             </div>
 
@@ -379,12 +366,9 @@
                 </div>
 
                 <div class="sig-section">
-                    <div class="sig-line">
-                        <canvas id="sig3" width="250" height="60"></canvas>
-                    </div>
+                    <div class="sig-line"></div>
                     <p style="font-size: 12px; font-weight: bold;">Kaique Fagundes</p>
                     <p style="font-size: 10px; color: #6b7280;">Logística e Transporte - Araraquara</p>
-                    <button onclick="clearSig('sig3')" class="btn-link no-print">Limpar Assinatura</button>
                 </div>
             </div>
 
@@ -414,106 +398,4 @@
                         <tr>
                             <th>Fornecedor</th>
                             <th style="text-align: center; width: 120px;">Valor</th>
-                            <th style="text-align: center; width: 150px;">Forma de Pagamento</th>
-                            <th style="text-align: center; width: 130px;">Prazo de Entrega</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><input type="text" value="Assalve & Assalve LTDA" style="width: 100%; border: none; outline: none;"></td>
-                            <td style="text-align: center; font-weight: bold;"><input type="text" value="R$ 55,00" style="width: 100%; border: none; outline: none; text-align: center; font-weight: bold;"></td>
-                            <td style="text-align: center;"><input type="text" value="Boleto" style="width: 100%; border: none; outline: none; text-align: center;"></td>
-                            <td style="text-align: center;"><input type="text" value="30 DIAS" style="width: 100%; border: none; outline: none; text-align: center;"></td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div style="margin-top: 100px; text-align: center;">
-                    <div class="grid-2" style="margin-bottom: 50px;">
-                        <div>
-                            <div style="width: 200px; margin: 0 auto 5px auto; border-bottom: 1px solid #000;"></div>
-                            <p style="font-size: 11px; font-weight: bold;">RESP. FROTA</p>
-                        </div>
-                        <div>
-                            <div style="width: 200px; margin: 0 auto 5px auto; border-bottom: 1px solid #000;"></div>
-                            <p style="font-size: 11px; font-weight: bold;">GERÊNCIA</p>
-                        </div>
-                    </div>
-                    <div>
-                        <div style="width: 200px; margin: 0 auto 5px auto; border-bottom: 1px solid #000;"></div>
-                        <p style="font-size: 11px; font-weight: bold;">GESTOR DE FROTA</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer">
-                Avenida Francisco Carlos Merlos, 2162 - Jardim Guanabara - Araraquara - SP | CEP: 14808-010
-            </div>
-        </div>
-
-    </div>
-
-    <!-- SCRIPT DE ASSINATURAS E IMAGENS -->
-    <script>
-        function loadImg(input, imgId) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById(imgId).src = e.target.result;
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        function setupCanvas(canvasId) {
-            const canvas = document.getElementById(canvasId);
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            let drawing = false;
-
-            function getPos(e) {
-                const rect = canvas.getBoundingClientRect();
-                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-                return { x: clientX - rect.left, y: clientY - rect.top };
-            }
-
-            function start(e) {
-                drawing = true;
-                const pos = getPos(e);
-                ctx.beginPath();
-                ctx.moveTo(pos.x, pos.y);
-                e.preventDefault();
-            }
-
-            function move(e) {
-                if (!drawing) return;
-                const pos = getPos(e);
-                ctx.lineWidth = 1.8;
-                ctx.lineCap = 'round';
-                ctx.strokeStyle = '#000080';
-                ctx.lineTo(pos.x, pos.y);
-                ctx.stroke();
-                e.preventDefault();
-            }
-
-            function stop() { drawing = false; }
-
-            canvas.addEventListener('mousedown', start);
-            canvas.addEventListener('mousemove', move);
-            canvas.addEventListener('mouseup', stop);
-            canvas.addEventListener('touchstart', start);
-            canvas.addEventListener('touchmove', move);
-            canvas.addEventListener('touchend', stop);
-        }
-
-        ['sig1', 'sig2', 'sig3'].forEach(setupCanvas);
-
-        function clearSig(id) {
-            const canvas = document.getElementById(id);
-            const ctx = canvas.getContext('2d');
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }
-    </script>
-</body>
-</html>
+                            <th style="text-align: center; width: 150px;">Form

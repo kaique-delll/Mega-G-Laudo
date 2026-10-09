@@ -76,6 +76,28 @@
             flex-direction: column;
             justify-content: space-between;
             border: 1px solid #d1d5db;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* MARCA D'ÁGUA SUAVE AO FUNDO (LETRA G) */
+        .a4-page::before {
+            content: "G";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 380px;
+            font-weight: bold;
+            color: rgba(0, 0, 0, 0.03);
+            pointer-events: none;
+            z-index: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .page-content {
+            position: relative;
+            z-index: 1;
         }
 
         @media print {
@@ -192,13 +214,13 @@
         table.data-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 12px;
+            font-size: 11px;
             margin-bottom: 20px;
         }
 
         table.data-table th, table.data-table td {
             border: 1px solid #000;
-            padding: 8px;
+            padding: 6px 8px;
             text-align: left;
         }
 
@@ -219,12 +241,26 @@
             border-bottom: 1px solid #000;
         }
 
-        .date-location {
-            text-align: right;
+        .date-location-bottom {
+            margin-top: 500px;
             font-size: 12px;
             font-weight: bold;
-            margin-top: 25px;
-            margin-bottom: 25px;
+        }
+
+        .approval-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            text-align: center;
+            margin-top: 650px;
+        }
+
+        .approval-item {
+            border-top: 1px solid #000;
+            padding-top: 5px;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
         }
 
         .footer {
@@ -233,12 +269,8 @@
             color: #4b5563;
             border-top: 1px solid #e5e7eb;
             padding-top: 10px;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
@@ -258,7 +290,7 @@
 
         <!-- ==================== PÁGINA 1: LAUDO E DETALHES ==================== -->
         <div class="a4-page">
-            <div>
+            <div class="page-content">
                 <div class="header">
                     <div style="display: flex; align-items: center; gap: 12px;">
                         <div class="logo-box">
@@ -306,7 +338,7 @@
 
         <!-- ==================== PÁGINA 2: FOTO DA PLACA / VEÍCULO ==================== -->
         <div class="a4-page">
-            <div>
+            <div class="page-content">
                 <div class="header">
                     <div style="display: flex; align-items: center; gap: 12px;">
                         <div class="logo-box">G<br><span style="font-size: 9px;">Mega G</span></div>
@@ -343,7 +375,7 @@
 
         <!-- ==================== PÁGINA 3: FOTOS DO REPARO ==================== -->
         <div class="a4-page">
-            <div>
+            <div class="page-content">
                 <div class="header">
                     <div style="display: flex; align-items: center; gap: 12px;">
                         <div class="logo-box">G<br><span style="font-size: 9px;">Mega G</span></div>
@@ -378,9 +410,9 @@
         </div>
 
 
-        <!-- ==================== PÁGINA 4: ORÇAMENTOS E FORNECEDORES ==================== -->
+        <!-- ==================== PÁGINA 4: TABELA DE ORÇAMENTOS ==================== -->
         <div class="a4-page">
-            <div>
+            <div class="page-content">
                 <div class="header">
                     <div style="display: flex; align-items: center; gap: 12px;">
                         <div class="logo-box">G<br><span style="font-size: 9px;">Mega G</span></div>
@@ -398,4 +430,69 @@
                         <tr>
                             <th>Fornecedor</th>
                             <th style="text-align: center; width: 120px;">Valor</th>
-                            <th style="text-align: center; width: 150px;">Form
+                            <th style="text-align: center; width: 150px;">Forma de Pagamento</th>
+                            <th style="text-align: center; width: 130px;">Prazo de Entrega</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" value="PEDRA LIMA (STO)" style="width: 100%; border: none; outline: none;"></td>
+                            <td style="text-align: center; font-weight: bold;"><input type="text" value="R$ 1.690,00" style="width: 100%; border: none; outline: none; text-align: center; font-weight: bold;"></td>
+                            <td style="text-align: center;"><input type="text" value="BOLETO" style="width: 100%; border: none; outline: none; text-align: center;"></td>
+                            <td style="text-align: center;"><input type="text" value="10 DIAS" style="width: 100%; border: none; outline: none; text-align: center;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="date-location-bottom">
+                    Araraquara, ____ / ____ / _________
+                </div>
+            </div>
+
+            <div class="footer">
+                Avenida Francisco Carlos Merlos, 2162 - Jardim Guanabara - Araraquara - SP | CEP: 14808-010
+            </div>
+        </div>
+
+
+        <!-- ==================== PÁGINA 5: ASSINATURAS E APROVAÇÕES ==================== -->
+        <div class="a4-page">
+            <div class="page-content">
+                <div class="header">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div class="logo-box">G<br><span style="font-size: 9px;">Mega G</span></div>
+                        <div class="header-title">
+                            <h2>Nova Mega G Atacadista de Alimentos S.A.</h2>
+                            <p>CNPJ: 19.043.440/0005-88</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="approval-grid">
+                    <div class="approval-item">RESP. FROTA</div>
+                    <div class="approval-item">GESTOR DE FROTA</div>
+                    <div class="approval-item">GERÊNCIA</div>
+                </div>
+            </div>
+
+            <div class="footer">
+                Avenida Francisco Carlos Merlos, 2162 - Jardim Guanabara - Araraquara - SP | CEP: 14808-010
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SCRIPT PARA CARREGAMENTO DE IMAGENS -->
+    <script>
+        function loadImg(input, imgId) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById(imgId).src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+</body>
+</html>

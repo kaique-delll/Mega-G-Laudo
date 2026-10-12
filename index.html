@@ -10,10 +10,10 @@
         @import url('https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap');
         
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: Arial, Helvetica, sans-serif; background-color: #f3f4f6; color: #000; padding: 20px; }
+        body { font-family: Arial, Helvetica, sans-serif; background-color: #f3f4f6; color: #000; padding: 20px 10px; }
 
         .top-bar {
-            max-width: 1000px;
+            max-width: 800px;
             margin: 0 auto 20px auto;
             background: #ffffff;
             padding: 15px 20px;
@@ -23,138 +23,267 @@
             justify-content: space-between;
             align-items: center;
             border: 1px solid #e5e7eb;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .top-bar h1 { font-size: 16px; color: #1f2937; }
+        .top-bar p { font-size: 11px; color: #6b7280; }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .select-tipo {
+            padding: 8px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 5px;
+            border: 1px solid #d1d5db;
+            outline: none;
         }
 
         .btn {
-            background-color: #000; color: #fff; font-weight: bold; padding: 10px 18px;
-            border: none; border-radius: 5px; cursor: pointer; font-size: 13px;
+            background-color: #000; color: #fff; font-weight: bold; padding: 9px 15px;
+            border: none; border-radius: 5px; cursor: pointer; font-size: 12px;
         }
         .btn:hover { background-color: #374151; }
 
+        /* A4 PAGE CONTAINER */
+        .a4-container { max-width: 800px; margin: 0 auto; }
+
         .a4-page {
-            max-width: 1000px; margin: 0 auto; background: #fff; padding: 30px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1); border: 1px solid #d1d5db;
+            width: 100%;
+            min-height: 1050px;
+            padding: 40px;
+            margin-bottom: 30px;
+            background: #ffffff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #d1d5db;
+            position: relative;
+            overflow: hidden;
         }
+
+        /* MARCA D'ÁGUA SUAVE (LETRA G) */
+        .a4-page::before {
+            content: "G";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 380px;
+            font-weight: bold;
+            color: rgba(0, 0, 0, 0.03);
+            pointer-events: none;
+            z-index: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .page-content { position: relative; z-index: 1; }
 
         @media print {
             body { background: white; padding: 0; }
             .no-print { display: none !important; }
-            .a4-page { box-shadow: none; border: none; width: 100%; padding: 0; }
+            .a4-page {
+                box-shadow: none; margin: 0; width: 100%; min-height: 100vh;
+                page-break-after: always; padding: 30px; border: none;
+            }
         }
 
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 15px; }
-        .logo-box { border: 2px solid #000; padding: 4px 8px; text-align: center; font-weight: bold; font-size: 12px; }
-        
-        table { width: 100%; border-collapse: collapse; font-size: 11px; margin-top: 15px; }
-        th, td { border: 1px solid #000; padding: 6px 8px; text-align: left; }
-        th { background-color: #f3f4f6; font-weight: bold; text-transform: uppercase; }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+
+        .logo-box {
+            border: 2px solid #000; padding: 4px 8px; text-align: center;
+            font-weight: bold; font-size: 12px; border-radius: 4px;
+        }
+
+        .header-title h2 { font-size: 13px; text-transform: uppercase; font-weight: bold; }
+        .header-title p { font-size: 11px; }
+
+        .title-doc {
+            text-align: center; font-size: 13px; font-weight: bold;
+            text-transform: uppercase; text-decoration: underline; margin-bottom: 20px;
+        }
+
+        table.data-table {
+            width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 20px;
+        }
+
+        table.data-table th, table.data-table td {
+            border: 1px solid #000; padding: 6px 8px; text-align: left;
+        }
+
+        table.data-table th {
+            background-color: #f3f4f6; font-weight: bold; text-transform: uppercase;
+        }
+
         .text-right { text-align: right; }
         .text-center { text-align: center; }
 
-        .obs-box { margin-top: 20px; font-size: 11px; font-style: italic; border: 1px dashed #000; padding: 10px; }
+        .obs-box {
+            margin-top: 15px; font-size: 11px; font-style: italic;
+            border: 1px dashed #000; padding: 8px; background: #fafafa;
+        }
+
+        .signature-area {
+            margin-top: 60px; text-align: right; font-size: 12px;
+        }
+
+        .footer {
+            text-align: center; font-size: 9px; color: #4b5563;
+            border-top: 1px solid #e5e7eb; padding-top: 10px; position: relative; z-index: 1;
+        }
     </style>
 </head>
 <body>
 
-    <!-- BARRA DE CONTROLE -->
+    <!-- BARRA DE CONTROLE SUPERIOR -->
     <div class="top-bar no-print">
         <div>
-            <h1 style="font-size: 16px;">Controle de Abastecimento - Posto</h1>
-            <p style="font-size: 11px; color: #6b7280;">Carregue o arquivo Excel do Posto para gerar a planilha formatada</p>
+            <h1>Controle de Abastecimento - Posto</h1>
+            <p>Nova Mega G Atacadista de Alimentos S.A. - Araraquara</p>
         </div>
-        <div style="display: flex; gap: 10px;">
-            <input type="file" id="excelFile" accept=".xlsx, .xls, .csv" class="no-print" style="font-size: 12px;">
+        <div class="controls">
+            <select id="tipoRelatorio" class="select-tipo" onchange="mudarTipo()">
+                <option value="frota">Frota Própria</option>
+                <option value="agregados">Agregados</option>
+            </select>
+            <input type="file" id="excelFile" accept=".xlsx, .xls, .csv" style="font-size: 11px;">
             <button onclick="window.print()" class="btn">🖨️ Imprimir / Salvar PDF</button>
         </div>
     </div>
 
-    <!-- PÁGINA DO RELATÓRIO -->
-    <div class="a4-page">
-        <!-- CABEÇALHO -->
-        <div class="header">
-            <div style="display: flex; align-items: center; gap: 12px;">
-                <div class="logo-box">G<br><span style="font-size: 9px;">Mega G</span></div>
-                <div>
-                    <h2 style="font-size: 13px; text-transform: uppercase;">NOVA MEGA G ATACADISTA DE ALIMENTOS S.A.</h2>
-                    <p style="font-size: 11px;">CNPJ: 19.043.440/0005-88</p>
+    <!-- PÁGINA A4 DO RELATÓRIO -->
+    <div class="a4-container">
+        <div class="a4-page">
+            <div class="page-content">
+                <!-- CABEÇALHO -->
+                <div class="header">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div class="logo-box">G<br><span style="font-size: 9px;">Mega G</span></div>
+                        <div class="header-title">
+                            <h2>NOVA MEGA G ATACADISTA DE ALIMENTOS S.A.</h2>
+                            <p>CNPJ: 19.043.440/0005-88</p>
+                        </div>
+                    </div>
+                    <div style="text-align: right; font-size: 11px; font-weight: bold;">
+                        POSTO MORADA DO SOL<br>
+                        <span style="font-weight: normal; font-size: 10px;" id="lblSubHeader">ABASTECIMENTO DIA 01/09/2026 ATÉ 01/10/2026 (FROTA)</span>
+                    </div>
+                </div>
+
+                <div class="title-doc" id="lblTitle">ABASTECIMENTO FROTA PRÓPRIA</div>
+
+                <!-- TABELA DE LANÇAMENTOS -->
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>DATA</th>
+                            <th>MOTORISTA</th>
+                            <th class="text-center">PLACA</th>
+                            <th class="text-right">VALOR (R$)</th>
+                            <th>DESCRIÇÃO</th>
+                            <th class="text-center">CONC</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Dados Padrão de Exibição (Frota) -->
+                        <tr>
+                            <td>01/09 a 01/10</td>
+                            <td>PAULO CESAR ACETOZZI</td>
+                            <td class="text-center">SHW9157</td>
+                            <td class="text-right">R$ 74,68</td>
+                            <td>IVECO CASA</td>
+                            <td class="text-center">ARLA32</td>
+                        </tr>
+                        <tr>
+                            <td>01/09 a 01/10</td>
+                            <td>MARCELO FRANCISCO DA SILVA</td>
+                            <td class="text-center">SHW9173</td>
+                            <td class="text-right">R$ 119,27</td>
+                            <td>IVECO CASA</td>
+                            <td class="text-center">ARLA32</td>
+                        </tr>
+                        <tr>
+                            <td>01/09 a 01/10</td>
+                            <td>EDENILSON LUIZ AFONSO*</td>
+                            <td class="text-center">SHW9192</td>
+                            <td class="text-right">R$ 44,26</td>
+                            <td>IVECO CASA</td>
+                            <td class="text-center">ARLA32</td>
+                        </tr>
+                        <tr>
+                            <td>01/09 a 01/10</td>
+                            <td>JOSÉ ARNALDO GUILHERME</td>
+                            <td class="text-center">TCA7G97</td>
+                            <td class="text-right">R$ 73,66</td>
+                            <td>IVECO CASA</td>
+                            <td class="text-center">ARLA32</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr style="font-weight: bold; background-color: #f9fafb;">
+                            <td colspan="3" class="text-right">TOTAL GERAL:</td>
+                            <td class="text-right" id="totalValue">R$ 311,87</td>
+                            <td colspan="2"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <!-- OBSERVAÇÕES -->
+                <div class="obs-box" id="obsBox">
+                    *Incluso neste valor, 1 un Fluído para arrefecimento Bardahl radiador, no valor de 21,00, autorizado pelo gestor.
+                </div>
+
+                <!-- ASSINATURA / DATA -->
+                <div class="signature-area">
+                    <p>Araraquara, _____ de ______________________ de 2026.</p>
+                    <br><br>
+                    <p>____________________________________________________</p>
+                    <p style="font-weight: bold; margin-top: 3px;">Kaique Fagundes - Logística & Transporte</p>
                 </div>
             </div>
-            <div style="text-align: right; font-size: 11px; font-weight: bold;">
-                POSTO MORADA DO SOL<br>
-                <span style="font-weight: normal; font-size: 10px;" id="periodoText">PERÍODO: 01/09/2026 ATÉ 01/10/2026</span>
+
+            <!-- RODAPÉ -->
+            <div class="footer">
+                Avenida Francisco Carlos Merlos, 2162 - Jardim Guanabara - Araraquara - SP | CEP: 14808-010
             </div>
-        </div>
-
-        <h3 style="text-align: center; font-size: 13px; text-transform: uppercase; margin: 15px 0; text-decoration: underline;">
-            ABASTECIMENTO FROTA PRÓPRIA (ARARAQUARA)
-        </h3>
-
-        <!-- TABELA PROCESSADA -->
-        <table id="dataTable">
-            <thead>
-                <tr>
-                    <th>Motorista</th>
-                    <th class="text-center">Placa</th>
-                    <th class="text-right">Valor Total (R$)</th>
-                    <th>Descrição do Consumo</th>
-                    <th class="text-center">Obs</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody">
-                <!-- Dados carregados via arquivo ou padrão de exibição -->
-                <tr>
-                    <td>PAULO CESAR ACETOZZI</td>
-                    <td class="text-center">SHW9157</td>
-                    <td class="text-right">R$ 74,68</td>
-                    <td>IVECO CASA / ARLA32</td>
-                    <td class="text-center">conc</td>
-                </tr>
-                <tr>
-                    <td>MARCELO FRANCISCO DA SILVA</td>
-                    <td class="text-center">SHW9173</td>
-                    <td class="text-right">R$ 119,27</td>
-                    <td>IVECO CASA / ARLA32</td>
-                    <td class="text-center">conc</td>
-                </tr>
-                <tr>
-                    <td>EDENILSON LUIZ AFONSO</td>
-                    <td class="text-center">SHW9192</td>
-                    <td class="text-right">R$ 44,26</td>
-                    <td>IVECO CASA / ARLA32</td>
-                    <td class="text-center">conc</td>
-                </tr>
-                <tr>
-                    <td>JOSÉ ARNALDO GUILHERME</td>
-                    <td class="text-center">TCA7G97</td>
-                    <td class="text-right">R$ 73,66</td>
-                    <td>IVECO CASA / ARLA32</td>
-                    <td class="text-center">conc</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr style="font-weight: bold; background-color: #f9fafb;">
-                    <td colspan="2" class="text-right">TOTAL GERAL:</td>
-                    <td class="text-right" id="totalValue">R$ 311,87</td>
-                    <td colspan="2"></td>
-                </tr>
-            </tfoot>
-        </table>
-
-        <!-- OBSERVAÇÕES E NOTAS -->
-        <div class="obs-box">
-            *Incluso no valor da placa SHW9192: 1 un Fluído para arrefecimento Bardahl radiador (R$ 21,00), autorizado pelo gestor.
-        </div>
-
-        <div style="margin-top: 40px; text-align: right; font-size: 11px;">
-            <p>Araraquara, _____ de ______________________ de 2026.</p>
-            <br><br>
-            <p>____________________________________________________</p>
-            <p style="font-weight: bold; margin-top: 3px;">Kaique Fagundes - Logística & Transporte</p>
         </div>
     </div>
 
-    <!-- SCRIPT DE LEITURA DO EXCEL -->
+    <!-- SCRIPT DE MANIPULAÇÃO E EXCEL -->
     <script>
+        function mudarTipo() {
+            const tipo = document.getElementById('tipoRelatorio').value;
+            const lblTitle = document.getElementById('lblTitle');
+            const lblSubHeader = document.getElementById('lblSubHeader');
+            const obsBox = document.getElementById('obsBox');
+
+            if (tipo === 'frota') {
+                lblTitle.innerText = "ABASTECIMENTO FROTA PRÓPRIA";
+                lblSubHeader.innerText = "ABASTECIMENTO DIA 01/09/2026 ATÉ 01/10/2026 (FROTA)";
+                obsBox.style.display = "block";
+                obsBox.innerText = "*Incluso neste valor, 1 un Fluído para arrefecimento Bardahl radiador, no valor de 21,00, autorizado pelo gestor.";
+            } else {
+                lblTitle.innerText = "ABASTECIMENTO AGREGADOS";
+                lblSubHeader.innerText = "ABASTECIMENTO (AGREGADOS)";
+                obsBox.style.display = "none";
+            }
+        }
+
         document.getElementById('excelFile').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (!file) return;
@@ -177,27 +306,30 @@
             tbody.innerHTML = '';
             let total = 0;
 
-            // Ignorar linhas de cabeçalho e ler os dados
-            for (let i = 1; i < rows.length; i++) {
+            // Procura linha de início dos dados ou lê a partir da 3ª linha
+            for (let i = 2; i < rows.length; i++) {
                 const row = rows[i];
-                if (row.length >= 3) {
-                    const motorista = row[0] || 'N/I';
-                    const placa = row[1] || 'N/I';
-                    const valor = parseFloat(row[2]) || 0;
-                    const desc = row[3] || 'ARLA32';
-                    const conc = row[4] || 'conc';
+                if (row && row.length >= 5) {
+                    const data = row[0] || '';
+                    const motorista = row[1] || '';
+                    const placa = row[3] || '';
+                    const valor = parseFloat(row[4]) || 0;
+                    const desc = row[5] || '';
+                    const conc = row[6] || '';
 
-                    total += valor;
-
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td>${motorista}</td>
-                        <td class="text-center">${placa}</td>
-                        <td class="text-right">R$ ${valor.toFixed(2).replace('.', ',')}</td>
-                        <td>${desc}</td>
-                        <td class="text-center">${conc}</td>
-                    `;
-                    tbody.appendChild(tr);
+                    if (valor > 0) {
+                        total += valor;
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${data}</td>
+                            <td>${motorista}</td>
+                            <td class="text-center">${placa}</td>
+                            <td class="text-right">R$ ${valor.toFixed(2).replace('.', ',')}</td>
+                            <td>${desc}</td>
+                            <td class="text-center">${conc}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    }
                 }
             }
             document.getElementById('totalValue').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
